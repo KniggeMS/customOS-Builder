@@ -4,10 +4,11 @@
 #>
 
 param(
-    [string]$Profile = "Minimal"
+    [string]$Profile = "Minimal",
+    [switch]$LTSC
 )
 
-Write-Host "=== customOS-Builder v0.2 wird gestartet ===" -ForegroundColor Cyan
+Write-Host "=== customOS-Builder v0.3 wird gestartet ===" -ForegroundColor Cyan
 
 # Admin-Check
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -15,7 +16,7 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     exit 1
 }
 
-# Ordner für Module
+# Module laden
 $ModulePath = "$PSScriptRoot\modules"
 if (Test-Path $ModulePath) {
     Get-ChildItem -Path $ModulePath -Filter "*.psm1" | ForEach-Object {
@@ -26,8 +27,8 @@ if (Test-Path $ModulePath) {
 
 Write-Host "Profil '$Profile' wird angewendet..." -ForegroundColor Green
 
-# Beispiel-Aufrufe (später erweitert)
-# Export-Drivers   # bei Bedarf manuell starten
-# Apply-CoreTweaks
+# CoreTweaks ausführen
+Invoke-CoreTweaks -LTSC:$LTSC
 
 Write-Host "`n=== customOS Setup abgeschlossen! ===" -ForegroundColor Cyan
+Write-Host "Viel Erfolg mit deinem customOS!" -ForegroundColor Magenta
