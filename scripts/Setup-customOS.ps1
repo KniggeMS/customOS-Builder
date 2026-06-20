@@ -8,7 +8,7 @@ param(
     [switch]$LTSC
 )
 
-Write-Host "=== customOS-Builder v0.3 wird gestartet ===" -ForegroundColor Cyan
+Write-Host "=== customOS-Builder v0.4 wird gestartet ===" -ForegroundColor Cyan
 
 # Admin-Check
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -27,8 +27,11 @@ if (Test-Path $ModulePath) {
 
 Write-Host "Profil '$Profile' wird angewendet..." -ForegroundColor Green
 
-# CoreTweaks ausführen
+# Kern-Tweaks
 Invoke-CoreTweaks -LTSC:$LTSC
 
+# Apps installieren
+Invoke-WingetApps -Profile $Profile
+
 Write-Host "`n=== customOS Setup abgeschlossen! ===" -ForegroundColor Cyan
-Write-Host "Viel Erfolg mit deinem customOS!" -ForegroundColor Magenta
+Write-Host "Viel Spaß mit deinem optimierten customOS!" -ForegroundColor Magenta
