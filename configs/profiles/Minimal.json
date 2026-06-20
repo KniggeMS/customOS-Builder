@@ -1,0 +1,11 @@
+{
+  "Name": "Minimal",
+  "Description": "Sauberes Basis-System mit Fokus auf Stabilität und Datensicherheit",
+  "DebloatingLevel": "Safe",
+  "InstallWingetApps": true,
+  "Tweaks": [
+    "Privacy",
+    "Services",
+    "Performance"
+  ]
+}

@@ -1,6 +1,7 @@
 <#
 .SYNOPSIS
     customOS-Builder - Modular Windows 11 Optimierungs-Framework
+    Version: 0.1
 #>
 
 param(
@@ -15,12 +16,20 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     exit 1
 }
 
-# TODO: Weitere Module laden
 Write-Host "Profil '$Profile' wird geladen..." -ForegroundColor Green
 
-# Beispiel: Basis-Tweaks
-Write-Host "Grundlegende Optimierungen werden angewendet..."
+# Basis-Funktionen
+function Test-Internet {
+    return (Test-Connection -ComputerName 8.8.8.8 -Count 1 -Quiet)
+}
 
-# Hier kommen später die Module
+# TODO: Module laden (später erweitern)
+Write-Host "Grundlegende System-Informationen..." -ForegroundColor Yellow
+Get-ComputerInfo | Select-Object WindowsVersion, WindowsBuildLabEx | Format-List
 
-Write-Host "Fertig! Dein customOS ist bereit." -ForegroundColor Cyan
+Write-Host "`nNächste Schritte werden vorbereitet..." -ForegroundColor Green
+
+# Hier kommen später die echten Module
+
+Write-Host "`n=== customOS Setup abgeschlossen! ===" -ForegroundColor Cyan
+Write-Host "Viel Spaß mit deinem optimierten System!" -ForegroundColor Magenta

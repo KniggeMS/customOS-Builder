@@ -1,41 +1,42 @@
 # customOS-Builder
 
-**A data-secure, optimised Windows 11 framework for custom OS enthusiasts** – with strong focus on **data partition protection** and modular setup.
+**A data-secure, optimised Windows 11 framework for custom OS enthusiasts** – mit starkem Fokus auf **Datenpartition-Schutz** und modularen Setup.
 
-Dieses Framework hilft dir, ein sauberes, performantes und datensicheres Windows 11 zu erstellen – egal ob für Entwickler, Power-User oder Custom-OS-Fans.
+Dieses Framework hilft dir und der Community, ein sauberes, schnelles und datensicheres Windows 11 zu erstellen – ohne teure Tools.
 
 ## ✨ Kernfeatures
 
-- **Datensichere Installation**: C: frisch installieren, während Partition E: (oder andere Datenpartitionen) komplett unangetastet bleibt
-- Modulares, idempotentes PowerShell-System
-- Starkes aber sicheres Debloating + Optimierungen (auch für LTSC)
-- Automatisierter Workflow mit JSON-Profilen
-- Vollkommen ohne teure Tools (kein NTLite nötig)
+- **Datensichere Installation**: C: neu installieren, E: (Datenpartition) bleibt 100% unangetastet
+- Modulares, idempotentes PowerShell-System (mehrmals ausführbar)
+- Sicheres Debloating + Performance-Tweaks (auch für LTSC)
+- JSON-Profile für verschiedene Anwendungsfälle
+- Automatischer Treiber-Export & Winget-Installation
 
 ## 🚀 Schnellstart
 
-1. Lade die neueste Windows 11 ISO herunter (empfohlen: IoT Enterprise LTSC oder normale 24H2/25H2)
-2. Erstelle einen bootfähigen USB-Stick mit **Rufus**
-3. Kopiere `templates/autounattend.xml` auf den Stick ins Root-Verzeichnis
-4. Starte die Installation → das Skript hält beim Partitionsmenü an
-5. Nach der Installation: Führe `Setup-customOS.ps1` als Administrator aus
+1. Windows 11 ISO herunterladen (empfohlen: **IoT Enterprise LTSC** oder 24H2/25H2)
+2. Bootfähigen USB mit **Rufus** erstellen
+3. `templates/autounattend.xml` ins Root des USB-Sticks kopieren
+4. Installation starten → beim Partitionsmenü C: auswählen (E: bleibt unberührt)
+5. Nach erster Anmeldung `Setup-customOS.ps1` als Administrator ausführen
 
-## 📁 Struktur
+## 📁 Ordnerstruktur
 
-- `scripts/` → Alle PowerShell-Skripte
-- `configs/profiles/` → Deine persönlichen Konfigurationen
-- `templates/` → autounattend.xml und andere Vorlagen
-- `docs/` → Detaillierte Anleitungen
+- `scripts/` — Haupt-Skripte und Module
+- `configs/profiles/` — JSON-Konfigurationen
+- `templates/` — autounattend.xml
+- `docs/` — Anleitungen
+- `Drivers/` — Lokal (wird ignoriert)
 
 ## ⚠️ Wichtige Warnungen
 
-- Erstelle immer ein **volles Backup** deiner Daten!
-- Teste zuerst in einer VM (VirtualBox, Hyper-V oder VMware)
-- Microsoft kann jederzeit Änderungen machen, die Tweaks beeinflussen
+- **Immer Backup machen** vor der Installation!
+- Zuerst in einer VM testen
+- Keine Garantie — Microsoft ändert Windows regelmäßig
 
 ---
 
 **Mitwirken**  
-Pull Requests und Issues sind sehr willkommen!
+Issues, Pull Requests und Feedback sind herzlich willkommen!
 
-Lizenz: MIT
+Lizenz: [MIT](LICENSE)
