@@ -1,0 +1,26 @@
+<#
+.SYNOPSIS
+    customOS-Builder - Modular Windows 11 Optimierungs-Framework
+#>
+
+param(
+    [string]$Profile = "Minimal"
+)
+
+Write-Host "=== customOS-Builder wird gestartet ===" -ForegroundColor Cyan
+
+# Administrator-Check
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    Write-Host "Bitte als Administrator ausführen!" -ForegroundColor Red
+    exit 1
+}
+
+# TODO: Weitere Module laden
+Write-Host "Profil '$Profile' wird geladen..." -ForegroundColor Green
+
+# Beispiel: Basis-Tweaks
+Write-Host "Grundlegende Optimierungen werden angewendet..."
+
+# Hier kommen später die Module
+
+Write-Host "Fertig! Dein customOS ist bereit." -ForegroundColor Cyan
