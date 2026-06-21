@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    customOS-Builder - Haupt-Einstiegspunkt (v0.6)
+    customOS-Builder - Haupt-Einstiegspunkt (v0.7)
 #>
 
 param(
@@ -8,7 +8,7 @@ param(
     [switch]$LTSC
 )
 
-Write-Host "=== customOS-Builder v0.6 wird gestartet ===" -ForegroundColor Cyan
+Write-Host "=== customOS-Builder v0.7 wird gestartet ===" -ForegroundColor Cyan
 
 # Admin-Check
 if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -16,22 +16,26 @@ if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
     exit 1
 }
 
-# Module laden
+# Alle Module laden
 $ModulePath = "$PSScriptRoot\modules"
 Get-ChildItem -Path $ModulePath -Filter "*.psm1" | ForEach-Object {
-    Import-Module $_.FullName -Force
+    Import-Module $_.FullName -Force -ErrorAction SilentlyContinue
     Write-Host "Modul geladen: $($_.Name)" -ForegroundColor Gray
 }
 
-# JSON Config laden
+# Config laden
 $config = Import-DevOSConfig -ProfileName $Profile
 
 Write-Host "Profil '$Profile' wird angewendet..." -ForegroundColor Green
 
+# Tweaks ausführen
 Invoke-CoreTweaks -LTSC:$LTSC
 Invoke-PrivacyTweaks
 Invoke-ServiceTweaks
+
+# Apps
 Invoke-WingetApps -Profile $Profile
-# Invoke-ScoopInstaller  # optional, kann manuell aufgerufen werden
+# Invoke-ScoopInstaller   # Bei Bedarf manuell oder per Profil aktivieren
 
 Write-Host "`n=== customOS Setup erfolgreich abgeschlossen! ===" -ForegroundColor Cyan
+Write-Host "Dein optimiertes System ist bereit." -ForegroundColor Magenta
