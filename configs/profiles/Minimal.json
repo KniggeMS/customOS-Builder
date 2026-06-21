@@ -1,11 +1,8 @@
 {
   "Name": "Minimal",
-  "Description": "Sauberes Basis-System mit Fokus auf Stabilität und Datensicherheit",
+  "Description": "Minimales, stabiles System mit maximaler Datensicherheit",
   "DebloatingLevel": "Safe",
-  "InstallWingetApps": true,
-  "Tweaks": [
-    "Privacy",
-    "Services",
-    "Performance"
-  ]
+  "LTSC": false,
+  "InstallWingetApps": false,
+  "Tweaks": ["Core"]
 }

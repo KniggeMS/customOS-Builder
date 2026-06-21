@@ -1,0 +1,15 @@
+{
+  "Name": "LTSC",
+  "Description": "Spezialprofil für Windows 11 IoT Enterprise LTSC",
+  "DebloatingLevel": "Safe",
+  "LTSC": true,
+  "InstallWingetApps": true,
+  "Tweaks": ["Core", "Privacy", "LTSC"],
+  "Apps": [
+    "Microsoft.PowerShell",
+    "Microsoft.WindowsTerminal",
+    "Git.Git",
+    "Microsoft.VisualStudioCode",
+    "7zip.7zip"
+  ]
+}

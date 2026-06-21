@@ -1,0 +1,18 @@
+{
+  "Name": "Developer",
+  "Description": "Optimierte Konfiguration für Software-Entwickler (WSL, Tools, Performance)",
+  "DebloatingLevel": "Balanced",
+  "LTSC": false,
+  "InstallWingetApps": true,
+  "Tweaks": ["Core", "Privacy", "Developer"],
+  "Apps": [
+    "Microsoft.PowerShell",
+    "Microsoft.WindowsTerminal",
+    "Git.Git",
+    "Microsoft.VisualStudioCode",
+    "7zip.7zip",
+    "Microsoft.VisualStudio.2022.Community",
+    "Python.Python.3.12",
+    "OpenJS.NodeJS"
+  ]
+}
