@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<unattend xmlns="urn:schemas-microsoft-com:unattend">
+<unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <!-- Windows PE Phase - Wichtiger Teil für Datensicherheit -->
     <settings pass="windowsPE">
-        <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <DiskConfiguration>
                 <WillWipeDisk>false</WillWipeDisk>
                 <Disk wcm:action="add">
@@ -20,11 +22,12 @@
             <UserData>
                 <AcceptEula>true</AcceptEula>
                 <FullName>CustomOS User</FullName>
-                <Organization></Organization>
+                <Organization>CustomOS</Organization>
             </UserData>
         </component>
     </settings>
 
+    <!-- Spezielle OOBE Konfiguration -->
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <OOBE>
@@ -34,7 +37,10 @@
                 <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
                 <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
                 <ProtectYourPC>3</ProtectYourPC>
+                <SkipMachineOOBE>true</SkipMachineOOBE>
+                <SkipUserOOBE>true</SkipUserOOBE>
             </OOBE>
+            
             <UserAccounts>
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
@@ -48,11 +54,13 @@
                     </LocalAccount>
                 </LocalAccounts>
             </UserAccounts>
+
+            <!-- Automatischer Start des Setup-Skripts nach erster Anmeldung -->
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
-                    <CommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\customOS\Setup-customOS.ps1"</CommandLine>
-                    <Description>Starte customOS Setup nach erster Anmeldung</Description>
+                    <CommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "C:\customOS\Setup-customOS.ps1" -Profile Minimal</CommandLine>
+                    <Description>customOS-Builder Post-Installation</Description>
                 </SynchronousCommand>
             </FirstLogonCommands>
         </component>
