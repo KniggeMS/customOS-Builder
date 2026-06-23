@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    
-    <!-- Windows PE Phase - Wichtiger Teil für Datensicherheit -->
+
+    <!-- Windows PE Phase -->
     <settings pass="windowsPE">
         <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+            
+            <!-- Datensicherheit: Nicht alles löschen -->
             <DiskConfiguration>
                 <WillWipeDisk>false</WillWipeDisk>
                 <Disk wcm:action="add">
@@ -11,6 +13,7 @@
                     <WillWipeDisk>false</WillWipeDisk>
                 </Disk>
             </DiskConfiguration>
+
             <ImageInstall>
                 <OSImage>
                     <InstallTo>
@@ -19,6 +22,14 @@
                     </InstallTo>
                 </OSImage>
             </ImageInstall>
+
+            <!-- Treiber während der Installation einbinden (kritische Treiber) -->
+            <DriverPaths>
+                <PathAndCredentials wcm:action="add">
+                    <Path>C:\Drivers</Path>   <!-- Wird später angepasst / auf USB kopiert -->
+                </PathAndCredentials>
+            </DriverPaths>
+
             <UserData>
                 <AcceptEula>true</AcceptEula>
                 <FullName>CustomOS User</FullName>
@@ -27,7 +38,7 @@
         </component>
     </settings>
 
-    <!-- Spezielle OOBE Konfiguration -->
+    <!-- OOBE Phase -->
     <settings pass="oobeSystem">
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
             <OOBE>
@@ -40,7 +51,7 @@
                 <SkipMachineOOBE>true</SkipMachineOOBE>
                 <SkipUserOOBE>true</SkipUserOOBE>
             </OOBE>
-            
+
             <UserAccounts>
                 <LocalAccounts>
                     <LocalAccount wcm:action="add">
@@ -55,7 +66,7 @@
                 </LocalAccounts>
             </UserAccounts>
 
-            <!-- Automatischer Start des Setup-Skripts nach erster Anmeldung -->
+            <!-- Automatischer Start nach erster Anmeldung -->
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
                     <Order>1</Order>
